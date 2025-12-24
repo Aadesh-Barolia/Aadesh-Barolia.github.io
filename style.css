@@ -1,80 +1,87 @@
-/* ----------------- RESET ----------------- */
+/* ---------- RESET (removes black gap) ---------- */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html,
-body {
-  overflow-x: hidden;              /* prevent page horizontal scroll */
-}
+/* html, body {
+  height: 100%;
+  overflow-x: hidden;
+} */
 
 body {
+  font-family: Arial, Helvetica, sans-serif;
   background: #000;
   color: #fff;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
-/* ----------------- HERO ----------------- */
+/* ---------- HERO ---------- */
 .hero {
-  position: relative;
   height: 100vh;
-
-  /* use your local image here */
-  background-image: url("/the_netflix_login_background__canada__2024___by_logofeveryt_dh0w8qv-fullview.jpg");
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-
-  border-bottom: 8px solid #222;
+  background:
+    linear-gradient(
+      rgba(0,0,0,0.85),
+      rgba(0,0,0,0.35),
+      rgba(0,0,0,0.9)
+    ),
+    url("/the_netflix_login_background__canada__2024___by_logofeveryt_dh0w8qv-fullview.jpg") center / cover no-repeat;
 }
+
 
 .overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at top, rgba(0,0,0,0.4), #000 70%);
+  background: linear-gradient(
+    rgba(0,0,0,0.6),
+    rgba(0,0,0,0.6)
+  );
 }
 
-/* ----------------- NAVBAR ----------------- */
+/* ---------- NAVBAR ---------- */
 .nav {
-  position: relative;
-  z-index: 2;
-  padding: 18px 60px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 10;
 }
 
-.logo {
-  color: #e50914;
-  font-size: 32px;
-  font-weight: 900;
-  letter-spacing: 2px;
+/* PNG LOGO */
+.logo img {
+  height: 32px;
+  display: block;
 }
-
+.logo:hover {
+  transform: scale(1.08);
+  filter: brightness(1.1);
+}
+/* NAV RIGHT */
 .nav-right {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-.lang,
-.footer-lang {
+.lang {
   background: transparent;
   color: #fff;
-  border: 1px solid #888;
+  border: 1px solid #aaa;
   padding: 6px 10px;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 
-/* ----------------- BUTTONS ----------------- */
+/* ---------- BUTTONS ---------- */
 .btn {
   background: #e50914;
   color: #fff;
   border: none;
   padding: 8px 18px;
-  border-radius: 3px;
+  border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
 }
@@ -84,59 +91,115 @@ body {
 }
 
 .btn-get-started {
+  padding: 14px 28px;
   font-size: 18px;
-  padding: 12px 26px;
 }
 
-/* ----------------- HERO CONTENT ----------------- */
+/* ---------- HERO CONTENT ---------- */
 .hero-content {
   position: relative;
-  z-index: 2;
-  max-width: 800px;
-  margin: 160px auto 0;
+  z-index: 5;
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 180px 20px 0;
   text-align: center;
-  padding: 0 20px;
 }
 
 .hero-content h1 {
   font-size: 3.5rem;
   font-weight: 900;
+  line-height: 1.1;
   margin-bottom: 20px;
 }
 
 .hero-content h2 {
   font-size: 1.6rem;
-  margin-bottom: 18px;
   font-weight: 500;
+  margin-bottom: 16px;
 }
 
 .hero-content p {
   font-size: 1.2rem;
 }
 
-/* ----------------- EMAIL FORM ----------------- */
+/* ---------- EMAIL FORM ---------- */
 .email-form {
   margin-top: 20px;
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 .email-form input {
-  min-width: 280px;
-  max-width: 500px;
   padding: 14px;
-  font-size: 16px;
+  min-width: 280px;
+  max-width: 450px;
+  width: 100%;
+  border-radius: 4px;
   border: none;
   outline: none;
-  border-radius: 3px;
+  font-size: 16px;
 }
 
-/* ----------------- TRENDING NOW ----------------- */
+/* ---------- MOBILE FIX ---------- */
+@media (max-width: 768px) {
+
+  .nav {
+    padding: 14px 16px;
+  }
+
+  .logo img {
+    height: 26px;
+  }
+
+  .lang {
+    display: none; /* Netflix hides language selector on mobile */
+  }
+
+  .hero-content {
+    padding-top: 120px;
+  }
+
+  .hero-content h1 {
+    font-size: 2.1rem;
+  }
+
+  .hero-content h2 {
+    font-size: 1.1rem;
+  }
+
+  .hero-content p {
+    font-size: 0.95rem;
+  }
+
+  .email-form {
+    flex-direction: column;
+  }
+
+  .btn-get-started {
+    width: 100%;
+  }
+  .hero {
+    height: 90vh;
+  }
+
+  .hero::before {
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.9),
+        rgba(0,0,0,0.6),
+        rgba(0,0,0,1)
+      );
+  }
+}
+
+
+
+/* ----------------- TRENDING ----------------- */
 .trending {
   padding: 40px 4vw 10px;
-  background: #000;
 }
 
 .trending h2 {
@@ -147,15 +210,11 @@ body {
 .cards-row {
   display: flex;
   gap: 18px;
-  overflow-x: auto;          /* scrollable horizontally */
+  overflow-x: auto;
   padding-bottom: 15px;
-
-  /* hide scrollbar but keep scroll */
-  -ms-overflow-style: none;  /* IE and old Edge */
-  scrollbar-width: none;     /* Firefox */
+  scrollbar-width: none;
 }
 
-/* WebKit browsers (Chrome, Edge, Safari, Opera) */
 .cards-row::-webkit-scrollbar {
   display: none;
 }
@@ -171,24 +230,20 @@ body {
   height: 250px;
   border-radius: 6px;
   object-fit: cover;
-  display: block;
 }
 
-/* rank number adjusted so it doesn't cover poster too much */
 .rank {
   position: absolute;
-  bottom: -18px;           /* moved further below card */
+  bottom: -18px;
   left: -4px;
-  font-size: 3.5rem;       /* slightly smaller */
+  font-size: 3.5rem;
   font-weight: 900;
-  color: #fff;
   -webkit-text-stroke: 3px #000;
 }
 
-/* ----------------- MORE REASONS ----------------- */
+/* ----------------- REASONS ----------------- */
 .reasons {
   padding: 40px 4vw 50px;
-  background: #000;
 }
 
 .reasons h2 {
@@ -208,21 +263,11 @@ body {
   padding: 18px 16px 24px;
 }
 
-.reason-card h3 {
-  margin-bottom: 10px;
-  font-size: 1.1rem;
-}
-
-.reason-card p {
-  font-size: 0.95rem;
-}
-
 /* ----------------- FAQ ----------------- */
 .faq {
   padding: 50px 8vw;
   border-top: 8px solid #222;
   border-bottom: 8px solid #222;
-  background: #000;
 }
 
 .faq h2 {
@@ -232,221 +277,68 @@ body {
 
 .faq-item {
   background: #303030;
-  color: #fff;
   padding: 22px 26px;
   margin-bottom: 8px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
   cursor: pointer;
-  font-size: 1.2rem;
-}
-
-.faq-item:hover {
-  background: #454545;
-}
-
-.plus {
-  font-size: 2rem;
-}
-
-.faq-bottom-text {
-  margin: 28px 0 10px;
-  font-size: 1.1rem;
-  text-align: center;
 }
 
 /* ----------------- FOOTER ----------------- */
 .footer {
-  padding: 40px 8vw 60px;
   background: #000;
-  color: #757575;
+  padding: 60px 8%;
+  color: #b3b3b3;
+  font-size: 14px;
 }
 
 .footer-top {
-  margin-bottom: 20px;
-  font-size: 0.9rem;
+  margin-bottom: 30px;
 }
 
 .footer-links {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  gap: 14px;
+  margin-bottom: 30px;
 }
 
-.footer a {
-  color: #757575;
-  font-size: 0.9rem;
+.footer-links a {
+  color: #b3b3b3;
   text-decoration: none;
+  font-size: 14px;
 }
 
-.footer a:hover {
+.footer-links a:hover {
   text-decoration: underline;
 }
 
+.store-buttons {
+  display: flex;
+  gap: 16px;
+  margin: 30px 0;
+}
+
+.store-buttons img {
+  height: 42px;
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+
+.store-buttons img:hover {
+  transform: scale(1.05);
+}
+
 .footer-lang {
+  background: #000;
+  color: #fff;
+  border: 1px solid #555;
+  padding: 8px 14px;
   margin-bottom: 20px;
 }
 
 .country {
-  font-size: 0.9rem;
+  margin-top: 10px;
+  font-size: 13px;
 }
 
-/* ----------------- RESPONSIVE (phones & tablets) ----------------- */
-@media (max-width: 768px) {
-
-  /* overall spacing */
-  .nav {
-    padding: 12px 12px;
-  }
-
-  .logo {
-    font-size: 26px;
-  }
-
-  .btn {
-    font-size: 14px;
-    padding: 6px 14px;
-  }
-
-  .hero {
-    height: 90vh;
-    border-bottom-width: 6px;
-  }
-
-  .hero-content {
-    margin-top: 90px;
-    padding: 0 14px;
-  }
-
-  .hero-content h1 {
-    font-size: 2.1rem;
-    line-height: 1.2;
-  }
-
-  .hero-content h2 {
-    font-size: 1.05rem;
-    margin-bottom: 12px;
-  }
-
-  .hero-content p {
-    font-size: 0.95rem;
-  }
-
-  .email-form {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .email-form input {
-    width: 100%;
-    max-width: none;
-  }
-
-  .btn-get-started {
-    width: 100%;
-    font-size: 1rem;
-    padding: 12px 0;
-  }
-
-  /* trending row on phones */
-  .trending {
-    padding: 24px 10px 4px;
-  }
-
-  .trending h2 {
-    font-size: 1.2rem;
-    margin-bottom: 14px;
-  }
-
-  .cards-row {
-    gap: 10px;
-    padding-bottom: 14px;
-    scroll-snap-type: x mandatory;   /* smoother card-by-card snapping */
-  }
-
-  .card {
-    width: 130px;
-    scroll-snap-align: start;
-  }
-
-  .poster {
-    height: 190px;
-  }
-
-  .rank {
-    bottom: -20px;          /* clearly below the poster */
-    left: 0;
-    font-size: 2.8rem;
-    -webkit-text-stroke: 2px #000;
-  }
-
-  /* reasons section */
-  .reasons {
-    padding: 24px 10px 30px;
-  }
-
-  .reasons h2 {
-    font-size: 1.25rem;
-    margin-bottom: 14px;
-  }
-
-  .reason-card {
-    padding: 14px 12px 18px;
-  }
-
-  .reason-card h3 {
-    font-size: 1rem;
-  }
-
-  .reason-card p {
-    font-size: 0.9rem;
-  }
-
-  /* FAQ section */
-  .faq {
-    padding: 30px 10px;
-    border-width: 6px 0;
-  }
-
-  .faq h2 {
-    font-size: 1.4rem;
-    margin-bottom: 18px;
-  }
-
-  .faq-item {
-    padding: 16px 14px;
-    font-size: 1rem;
-  }
-
-  .plus {
-    font-size: 1.4rem;
-  }
-
-  .faq-bottom-text {
-    font-size: 0.95rem;
-    margin-top: 20px;
-  }
-
-  /* footer */
-  .footer {
-    padding: 24px 10px 36px;
-  }
-
-  .footer-top {
-    font-size: 0.8rem;
-  }
-
-  .footer-links {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
-  }
-
-  .footer a {
-    font-size: 0.8rem;
-  }
-
-  .country {
-    font-size: 0.8rem;
-  }
-}
